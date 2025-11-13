@@ -5,21 +5,21 @@
 ❗️Exclamation Marks ❗️indicate action items; you should remove these emoji as you complete/update the items which 
   they accompany. (This means that your final README should have no ❗️in it!)
 
-❗️**Author(s)**: Your name(s) here
+️**Author(s)**: Lindsay Manabat and Julius Fritz
 
-❗️**Google Doc Link**: Your link here
+️**Google Doc Link**: https://docs.google.com/document/d/1ZJxvK9T8e1s6n0YdTw4ysDT0Wz4_HKCg75EftcwxkJg/edit?usp=sharing
 
 ---
 
 ## Milestone 1: Setup, Planning, Design
 
-❗️**Title**: `What is the title of your project? Be creative! Replace this block of text.`
+️**Title**: `Blackjack`
 
-❗**Purpose**: `In a single sentence, describe WHAT your project will do. Replace this block of text.`
+**Purpose**: `The orginal idea of blackjack but with a twist of having a special card.`
 
-❗️**Source Assignment(s)**: `List which original assignments you will base your project on? Replace this block of text.`
+**Source Assignment(s)**: ` Homework on "The Game of Nim. Teamwork on 'Intro to Classes, The Legend of Tuna"`
 
-❗️**CRC Card(s)**:
+️**CRC Card(s)**:
   - Create a CRC card for each class that your project will implement.
   - See this link for a sample CRC card and a template to use for your own cards (you will have to make a copy to edit):
     [CRC Card Example](https://docs.google.com/document/d/1JE_3Qmytk_JGztRqkPXWACJwciPH61VCx3idIlBCVFY/edit?usp=sharing)
@@ -28,24 +28,33 @@
     and REPLACE it with your own:
   
 ![Don't leave me in your README!](image/crc.png "Image of CRC card as an example. Upload your CRC card(s) in place of this one. ")
+[Player CRC card!](image/Player%20CRC.png "Player CRC Card")
 
-❗️**Branches**: This project will **require** effective use of git. 
+[Dealer CRC card!](image/Dealer%20CRC.png "Dealer CRC Card")
 
-❗Each partner should create a branch at the beginning of the project, and stay on this branch (or branches of their 
+[Screen CRC card!](image/Screen.png "Screen CRC Card")
+
+[Character CRC card!](image/Character%20CRC.png "Character CRC Card")
+
+**Branches**: This project will **require** effective use of git. 
+
+Each partner should create a branch at the beginning of the project, and stay on this branch (or branches of their 
 branch) as they work. When you need to bring each others branches together, do so by merging each other's branches 
 into your own, following the process we've discussed in previous assignments, then re-branching out from the merged code.  
 
 ```
-    Branch 1 starting name: _____________
-    Branch 2 starting name: _____________
+    Branch 1 starting name: manabatl3
+    Branch 2 starting name: fritzj2
 ```
 
 ### References 
 
-❗Throughout this project, you will likely use outside resources. Reference all ideas which are not your own, 
+Throughout this project, you will likely use outside resources. Reference all ideas which are not your own, 
 and describe how you integrated the ideas or code into your program. This includes online sources, people who have 
 helped you, AI tools you've used, and any other resources that are not solely your own contribution. Update this 
 section as you go. DO NOT forget about it!
+
+- https://www.247blackjack.com/
 
 ---
 
