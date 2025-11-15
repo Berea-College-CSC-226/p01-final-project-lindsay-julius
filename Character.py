@@ -10,10 +10,12 @@ class Character:
         self.card_values = 0
         self.number_of_cards = 0
         self.number_of_aces = 0
+        self.bet = 0
 
     def card_picker(self):
         card = random.randint(1,13)
         suit = random.randint(1,4)
+        self.number_of_cards += 1
         if card == 1:
             print('you drew a {0}'.format(card))
             self.number_of_aces += 1
