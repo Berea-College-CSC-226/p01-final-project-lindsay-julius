@@ -2,7 +2,7 @@
 
 '''
 
-import pygame, random, Character, Game
+import pygame, random, Character
 
 
 class Player(Character.Character):
