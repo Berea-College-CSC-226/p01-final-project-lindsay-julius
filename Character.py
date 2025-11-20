@@ -37,9 +37,10 @@ class Character:
                 return
         print(self.card_values)
 
-# player = Character()
-# player.card_picker()
-# player.card_picker()
-# player.card_picker()
+if __name__ == '__main__':
+    player = Character()
+    player.card_picker()
+    player.card_picker()
+    player.card_picker()
 
 
