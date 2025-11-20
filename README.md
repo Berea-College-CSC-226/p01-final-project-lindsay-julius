@@ -55,18 +55,23 @@ helped you, AI tools you've used, and any other resources that are not solely yo
 section as you go. DO NOT forget about it!
 
 - https://www.247blackjack.com/
+- https://www.piskelapp.com/
+- https://www.pygame.org/docs/
+- 
 
 ---
 
 ## Milestone 2: Code Setup and Issue Queue
 
-❗Most importantly, keep your issue queue up to date, and focus on your code. 🙃
+Most importantly, keep your issue queue up to date, and focus on your code. 🙃
 
-❗Reflect on what you’ve done so far. How’s it going? Are you feeling behind/ahead? What are you worried about? 
+Reflect on what you’ve done so far. How’s it going? Are you feeling behind/ahead? What are you worried about? 
 What has surprised you so far? Describe your general feelings. Be honest with yourself; this section is for you, not me.
 
 ```
-    **Replace this text with your reflection
+    We think the pace we're working seems good. We're worried that it'll eventually catch up on us and working on the screen with pygame. 
+    We've been cordinating pretty well and hope to continue. We're getting the hang of using/writing issue queue. Get better on using the feedback 
+    we got from David and implement it onto the next work session. Use the LAB TA hours for better understanding on how to approach what we want to do.
 ```
 
 ---
