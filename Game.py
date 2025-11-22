@@ -5,25 +5,39 @@
 import pygame, random
 import Character, Player, Dealer
 
-def turn_of_play(user, cpu):
-    while turn == 'player':
-        user.cardpicker()
-    cpu.dealers_turn()
-    showdown(user, cpu)
+class Game:
+    def __init__(self):
+        self.size = (800,600)
+        self.running = True
+        self.screen = pygame.display.set_mode(self.size)
+        self.screen.fill((1,1,1))
+        self.user = Player.Player()
+        self.cpu = Dealer.Dealer()
+        self.turn = 'player'
 
-def showdown(user, cpu):
-    if user.card_values > cpu.card_values:
-        print('You win!')
-    else:
-        print('You lose!')
+    def turn_of_play(self):
+        while self.running:
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    self.running = False
+
+            while self.turn == 'player':
+                pass
+                #self.user.card_picker()
+            self.cpu.dealers_turn()
+            self.showdown()
+
+    def showdown(self):
+        if self.user.card_values > self.cpu.card_values:
+            print('You win!')
+        else:
+            print('You lose!')
+
+
 
 def main():
-    global turn
-    turn = 'player'
-    user = Player.Player()
-    cpu = Dealer.Dealer()
-    turn_of_play(user, cpu)
-    #the game is mad at the user because it thinks it doesn't have the method card picker (it's from its parent function)
+    game = Game()
+    game.turn_of_play()
 
 
 
