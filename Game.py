@@ -10,7 +10,7 @@ class Game:
         self.size = (800,600)
         self.running = True
         self.screen = pygame.display.set_mode(self.size)
-        self.screen.fill((1,1,1))
+        self.screen.fill('#00850b')
         self.user = Player.Player()
         self.cpu = Dealer.Dealer()
         self.turn = 'player'
