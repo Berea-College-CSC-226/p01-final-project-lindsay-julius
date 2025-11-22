@@ -11,20 +11,21 @@ class Character:
         self.number_of_cards = 0
         self.number_of_aces = 0
         self.bet = 0
+        self.card = 0
 
     def card_picker(self):
-        card = random.randint(1,13)
+        self.card = random.randint(1,13)
         suit = random.randint(1,4)
         self.number_of_cards += 1
-        if card == 1:
-            print('you drew a {0}'.format(card))
+        if self.card == 1:
+            print('you drew a {0}'.format(self.card))
             self.number_of_aces += 1
             self.card_values += 11
-        elif 1 < card <= 10:
-            print('you drew a {0}'.format(card))
-            self.card_values += card
+        elif 1 < self.card <= 10:
+            print('you drew a {0}'.format(self.card))
+            self.card_values += self.card
         else:
-            print('you drew a {0}'.format(card))
+            print('you drew a {0}'.format(self.card))
             self.card_values += 10
 
         if self.card_values > 21:

@@ -28,13 +28,10 @@
     and REPLACE it with your own:
   
 ![Don't leave me in your README!](image/crc.png "Image of CRC card as an example. Upload your CRC card(s) in place of this one. ")
-[Player CRC card!](image/Player%20CRC.png "Player CRC Card")
-
-[Dealer CRC card!](image/Dealer%20CRC.png "Dealer CRC Card")
-
-[Screen CRC card!](image/Screen.png "Screen CRC Card")
-
-[Character CRC card!](image/Character%20CRC.png "Character CRC Card")
+![Player CRC card!](image/Player%20CRC.png "Player CRC Card")
+![Dealer CRC card!](image/Dealer%20CRC.png "Dealer CRC Card")
+![Screen CRC card!](image/Screen.png "Screen CRC Card")
+![Character CRC card!](image/Character%20CRC.png "Character CRC Card")
 
 **Branches**: This project will **require** effective use of git. 
 
