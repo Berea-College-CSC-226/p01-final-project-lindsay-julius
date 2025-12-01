@@ -24,16 +24,17 @@ class Game:
             # The code above allows the game to quit
 
             if  self.turn == 'player':
-                if event.type == pygame.KEYDOWN:
-                    if event.key == pygame.K_SPACE:
+                # if event.type == pygame.KEYDOWN:
+                    keypress = pygame.key.get_pressed()
+                    if keypress[pygame.K_SPACE]:
                         print('players turn to draw a card')
-                    #add draw function here
+                        self.user.card_picker()
                     # Above are the functions and methods that the player can call
                     if self.user.card_values > 21:
                         print(f'You lost! Total is {self.user.card_values}.')
                         self.turn = 'game over'
 
-                    if event.key == pygame.K_s: # s stands fors stand
+                    if keypress[pygame.K_s]: # s stands fors stand so when the s key is hit it activates
                         self.turn = 'dealer'
 
 
@@ -47,7 +48,7 @@ class Game:
             elif self.turn == 'game_over':
                 pass
             pygame.display.update()
-            self.clock.tick(24)
+            self.clock.tick(12)
 
         # else:
         #
