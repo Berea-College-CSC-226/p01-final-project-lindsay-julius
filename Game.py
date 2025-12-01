@@ -28,32 +28,30 @@ class Game:
                     if event.key == pygame.K_SPACE:
                         print('players turn to draw a card')
                     #add draw function here
-                # Above are the functions and methods that the player can call
+                    # Above are the functions and methods that the player can call
                     if self.user.card_values > 21:
                         print(f'You lost! Total is {self.user.card_values}.')
                         self.turn = 'game over'
 
+                    if event.key == pygame.K_s: # s stands fors stand
+                        self.turn = 'dealer'
 
 
-            elif event.key == pygame.K_s: # s stands fors stand
-                self.turn = 'dealer'
+            elif self.turn == 'dealer':
+                print("Dealer's turn..")
+                self.cpu.dealers_turn()
+                self.showdown()
+                self.turn = 'game_over'
 
 
-        if self.turn == 'plater':
-            pass
+            elif self.turn == 'game_over':
+                pass
+            pygame.display.update()
+            self.clock.tick(24)
 
-
-        elif self.turn == 'dealer':
-            print("Dealer's turn..")
-            self.cpu.dealers_turn()
-            self.showdown()
-            self.turn = 'game_over'
-
-        elif self.turn == 'game_over':
-            pass
-
-        else:
-            print('game end')
+        # else:
+        #
+        #     print('game end')
             # elif self.turn == 'dealer':
             #     self.cpu.dealers_turn()
             #     self.showdown()
@@ -63,8 +61,9 @@ class Game:
             #     print('game end')
             #     #Logic at the end of the game that will allow the player to replay the game.
             #
-            pygame.display.update()
-            self.clock.tick(24)
+
+
+
             # Handles the screen not crashing
 
 
