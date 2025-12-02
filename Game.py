@@ -88,7 +88,7 @@ class Button():
         self.screen = screen
         width = image.get_width()
         height = image.get_height()
-        self.image = pygame.transform.scale(image,(int(width * 2), int(height * 2)))
+        self.image = image # or pygame.transform.scale(image,(int(width * 2), int(height * 2))) for scale
         self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)
 
@@ -97,7 +97,12 @@ class Button():
         pos = pygame.mouse.get_pos()
         print(pos)
 
+        if self.rect.collidepoint(pos):
+            if pygame.mouse.get_pressed()[0] == 1:
+                print('ClICK')
+
         self.screen.blit(self.image, (self.rect.x, self.rect.y))
+
 
 
 
