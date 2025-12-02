@@ -15,6 +15,7 @@ class Game:
         self.user = Player.Player()
         self.cpu = Dealer.Dealer()
         self.turn = 'player'
+        self.stand_button = pygame.image.load('images/stand_button.png').convert_alpha()
 
     def turn_of_play(self):
         while self.running:
