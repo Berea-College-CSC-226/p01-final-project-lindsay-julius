@@ -72,10 +72,11 @@ class Game:
     def showdown(self):
         if self.user.card_values > 21:
             print('You Lose!')
-        elif self.user.card_values > self.cpu.card_values:
+        elif self.user.card_values > self.cpu.card_values or self.cpu.card_values > 21:
             print('You Win!')
         else:
             print('You lose!')
+
 
 
 
