@@ -15,7 +15,10 @@ class Game:
         self.user = Player.Player()
         self.cpu = Dealer.Dealer()
         self.turn = 'player'
-        self.stand_button = pygame.image.load('images/stand_button.png').convert_alpha()
+        self.stand_button = pygame.image.load('Game_Images/stand_button.png').convert_alpha()
+
+        self.stand_button = Button(100, 200, self.stand_button, self.screen)
+
 
     def turn_of_play(self):
         while self.running:
@@ -48,8 +51,10 @@ class Game:
 
             elif self.turn == 'game_over':
                 pass
+            self.stand_button.draw()
             pygame.display.update()
             self.clock.tick(12)
+
 
         # else:
         #
@@ -77,6 +82,22 @@ class Game:
             print('You Win!')
         else:
             print('You lose!')
+
+class Button():
+    def __init__(self, x, y, image, screen):
+        self.screen = screen
+        width = image.get_width()
+        height = image.get_height()
+        self.image = pygame.transform.scale(image,(int(width * 2), int(height * 2)))
+        self.rect = self.image.get_rect()
+        self.rect.topleft = (x, y)
+
+    def draw(self):
+
+        pos = pygame.mouse.get_pos()
+        print(pos)
+
+        self.screen.blit(self.image, (self.rect.x, self.rect.y))
 
 
 
