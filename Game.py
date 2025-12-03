@@ -14,10 +14,10 @@ class Game:
         self.clock = pygame.time.Clock()
         self.user = Player.Player()
         self.cpu = Dealer.Dealer()
-        self.turn = 'player'
+        self.turn = ['player']
         self.stand_button = pygame.image.load('Game_Images/stand_button.png').convert_alpha()
 
-        self.stand_button = Button(100, 200, self.stand_button, self.screen)
+        self.stand_button = Button(100, 200, self.stand_button, self.screen, self.turn)
 
 
     def turn_of_play(self):
@@ -27,7 +27,7 @@ class Game:
                     self.running = False
             # The code above allows the game to quit
 
-            if  self.turn == 'player':
+            if  self.turn[:] == ['player']:
                 # if event.type == pygame.KEYDOWN:
                     keypress = pygame.key.get_pressed()
                     if keypress[pygame.K_SPACE]:
@@ -36,20 +36,21 @@ class Game:
                     # Above are the functions and methods that the player can call
                     if self.user.card_values > 21:
                         print(f'You lost! Total is {self.user.card_values}.')
-                        self.turn = 'game over'
+                        self.turn[:] = ['game over']
 
                     if keypress[pygame.K_s]: # s stands fors stand so when the s key is hit it activates
-                        self.turn = 'dealer'
+                        self.turn[:] = ['dealer']
 
 
-            elif self.turn == 'dealer':
+            elif self.turn == ['dealer']:
                 print("Dealer's turn..")
+                print(self.turn is self.stand_button.turn)
                 self.cpu.dealers_turn()
                 self.showdown()
-                self.turn = 'game_over'
+                self.turn[:] = ['game_over']
 
 
-            elif self.turn == 'game_over':
+            elif self.turn == ['game_over']:
                 pass
             self.stand_button.draw()
             pygame.display.update()
@@ -83,23 +84,25 @@ class Game:
         else:
             print('You lose!')
 
-class Button():
-    def __init__(self, x, y, image, screen):
+class Button:
+    def __init__(self, x, y, image, screen, turn):
         self.screen = screen
         width = image.get_width()
         height = image.get_height()
         self.image = image # or pygame.transform.scale(image,(int(width * 2), int(height * 2))) for scale
         self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)
+        self.turn = turn
 
     def draw(self):
 
         pos = pygame.mouse.get_pos()
-        print(pos)
+        # print(pos)
 
         if self.rect.collidepoint(pos):
             if pygame.mouse.get_pressed()[0] == 1:
                 print('ClICK')
+                self.turn[:] = ['dealer']
 
         self.screen.blit(self.image, (self.rect.x, self.rect.y))
 
@@ -109,6 +112,7 @@ class Button():
 
 def main():
     game = Game()
+    print(game.turn is game.stand_button.turn)
     game.turn_of_play()
 
 
