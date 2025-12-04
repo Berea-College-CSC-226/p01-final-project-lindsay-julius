@@ -16,8 +16,14 @@ class Game:
         self.cpu = Dealer.Dealer()
         self.turn = ['player']
         self.stand_button = pygame.image.load('Game_Images/stand_button.png').convert_alpha()
+        self.stand_button = Button(100, 200, self.stand_button, self.screen, self.turn, 'Stand',self.user)
 
-        self.stand_button = Button(100, 200, self.stand_button, self.screen, self.turn, 'Stand')
+        self.raise_bet = pygame.image.load('Game_Images/Plus Button.png').convert_alpha()
+        self.raise_bet = Button(100, 400, self.raise_bet, self.screen, self.turn, 'Raise',self.user)
+
+        self.lower_bet = pygame.image.load('Game_Images/Minus Button.png').convert_alpha()
+        self.lower_bet = Button(100, 300, self.lower_bet, self.screen, self.turn, 'Lower',self.user)
+
 
 
     def turn_of_play(self):
@@ -44,7 +50,7 @@ class Game:
 
             elif self.turn == ['dealer']:
                 print("Dealer's turn..")
-                print(self.turn is self.stand_button.turn)
+                print(self.user.bet)
                 self.cpu.dealers_turn()
                 self.showdown()
                 self.turn[:] = ['game_over']
@@ -53,6 +59,8 @@ class Game:
             elif self.turn == ['game_over']:
                 pass
             self.stand_button.draw()
+            self.lower_bet.draw()
+            self.raise_bet.draw()
             pygame.display.update()
             self.clock.tick(12)
 
@@ -84,8 +92,8 @@ class Game:
         else:
             print('You lose!')
 
-class Button:
-    def __init__(self, x, y, image, screen, turn, name):
+class Button(Game):
+    def __init__(self, x, y, image, screen, turn, name, player):
         self.screen = screen
         width = image.get_width()
         height = image.get_height()
@@ -94,6 +102,7 @@ class Button:
         self.rect.topleft = (x, y)
         self.turn = turn
         self.name = name
+        self.player = player
 
     def draw(self):
 
@@ -103,10 +112,21 @@ class Button:
 
         if self.rect.collidepoint(pos):   # this is the click function
             if pygame.mouse.get_pressed()[0] == 1:
-                print('ClICK')
-                self.turn[:] = ['dealer']
                 if self.name == 'Stand':    # checking which button you're clicking
-                    print('s')
+                    print('standing')
+                    self.turn[:] = ['dealer']
+                if self.name == 'Raise':
+                    self.player.bet += 50
+                    if self.player.bet > self.player.money:
+                        self.player.bet = self.player.money
+                    print(self.player.bet)
+                if self.name == 'Lower':
+                    self.player.bet -= 50
+                    if self.player.bet < 0:
+                        self.player.bet = 0
+                    print(self.player.bet)
+
+
 
 
 
@@ -118,7 +138,6 @@ class Button:
 
 def main():
     game = Game()
-    print(game.turn is game.stand_button.turn)
     game.turn_of_play()
 
 
