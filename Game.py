@@ -25,7 +25,6 @@ class Game:
         self.lower_bet = Button(100, 300, self.lower_bet, self.screen, self.turn, 'Lower',self.user)
 
 
-
     def turn_of_play(self):
         while self.running:
             for event in pygame.event.get():
@@ -56,20 +55,39 @@ class Game:
 
 
             elif self.turn == ['game_over']:
-                pass
+                keypress = pygame.key.get_pressed()
+                print('Play again?') # TODO make this only print once not every frame.
+                if keypress[pygame.K_SPACE]:
+                    self.user.bet = 50
+                    self.user.card_values = 0
+                    self.user.number_of_aces = 0
+                    self.user.number_of_cards = 0
+                    self.cpu.card_values = 0
+                    self.cpu.number_of_aces = 0
+                    self.cpu.number_of_cards = 0
+                    self.turn[:] = ['player']
+
+            # The functions below add the objects to the screen
             self.stand_button.draw()
             self.lower_bet.draw()
             self.raise_bet.draw()
+            # These update the display every 12 frames
             pygame.display.update()
             self.clock.tick(12)
 
     def showdown(self):
         if self.user.card_values > 21:
             print('You Lose!')
+            self.turn[:] = ['game_over']
+            self.turn_of_play()
         elif self.user.card_values > self.cpu.card_values or self.cpu.card_values > 21:
             print('You Win!')
+            self.turn[:] = ['game_over']
+            self.turn_of_play()
         else:
             print('You lose!')
+            self.turn[:] = ['game_over']
+            self.turn_of_play()
 
 class Button:
     def __init__(self, x, y, image, screen, turn, name, player):
@@ -100,14 +118,9 @@ class Button:
                     print(self.player.bet)
                 if self.name == 'Lower':     # Removes 50 to their bet
                     self.player.bet -= 50
-                    if self.player.bet < 0:
-                        self.player.bet = 0
+                    if self.player.bet < 50:
+                        self.player.bet = 50
                     print(self.player.bet)
-
-
-
-
-
         self.screen.blit(self.image, (self.rect.x, self.rect.y))
 
 

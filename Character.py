@@ -10,7 +10,7 @@ class Character:
         self.card_values = 0
         self.number_of_cards = 0
         self.number_of_aces = 0
-        self.bet = 0
+        self.bet = 50
         self.card = 0
 
     def card_picker(self):
