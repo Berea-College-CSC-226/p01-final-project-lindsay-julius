@@ -34,7 +34,6 @@ class Character:
                 self.card_values -= 10
                 self.number_of_aces -= 1
             else:
-                print('You Lose')
                 return
         print(self.card_values)
 

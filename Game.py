@@ -50,7 +50,6 @@ class Game:
 
             elif self.turn == ['dealer']:
                 print("Dealer's turn..")
-                print(self.user.bet)
                 self.cpu.dealers_turn()
                 self.showdown()
                 self.turn[:] = ['game_over']
@@ -64,26 +63,6 @@ class Game:
             pygame.display.update()
             self.clock.tick(12)
 
-
-        # else:
-        #
-        #     print('game end')
-            # elif self.turn == 'dealer':
-            #     self.cpu.dealers_turn()
-            #     self.showdown()
-            #     #These are the actions that the dealer will take
-            #
-            # else:
-            #     print('game end')
-            #     #Logic at the end of the game that will allow the player to replay the game.
-            #
-
-
-
-            # Handles the screen not crashing
-
-
-
     def showdown(self):
         if self.user.card_values > 21:
             print('You Lose!')
@@ -92,7 +71,7 @@ class Game:
         else:
             print('You lose!')
 
-class Button(Game):
+class Button:
     def __init__(self, x, y, image, screen, turn, name, player):
         self.screen = screen
         width = image.get_width()
@@ -109,18 +88,17 @@ class Button(Game):
         pos = pygame.mouse.get_pos()
         # print(pos)
 
-
         if self.rect.collidepoint(pos):   # this is the click function
             if pygame.mouse.get_pressed()[0] == 1:
                 if self.name == 'Stand':    # checking which button you're clicking
                     print('standing')
                     self.turn[:] = ['dealer']
-                if self.name == 'Raise':
+                if self.name == 'Raise':     # Adds 50 to their bet
                     self.player.bet += 50
                     if self.player.bet > self.player.money:
                         self.player.bet = self.player.money
                     print(self.player.bet)
-                if self.name == 'Lower':
+                if self.name == 'Lower':     # Removes 50 to their bet
                     self.player.bet -= 50
                     if self.player.bet < 0:
                         self.player.bet = 0
