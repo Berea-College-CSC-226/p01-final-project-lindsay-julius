@@ -17,7 +17,7 @@ class Game:
         self.turn = ['player']
         self.stand_button = pygame.image.load('Game_Images/stand_button.png').convert_alpha()
 
-        self.stand_button = Button(100, 200, self.stand_button, self.screen, self.turn)
+        self.stand_button = Button(100, 200, self.stand_button, self.screen, self.turn, 'Stand')
 
 
     def turn_of_play(self):
@@ -85,7 +85,7 @@ class Game:
             print('You lose!')
 
 class Button:
-    def __init__(self, x, y, image, screen, turn):
+    def __init__(self, x, y, image, screen, turn, name):
         self.screen = screen
         width = image.get_width()
         height = image.get_height()
@@ -93,16 +93,22 @@ class Button:
         self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)
         self.turn = turn
+        self.name = name
 
     def draw(self):
 
         pos = pygame.mouse.get_pos()
         # print(pos)
 
-        if self.rect.collidepoint(pos):
+
+        if self.rect.collidepoint(pos):   # this is the click function
             if pygame.mouse.get_pressed()[0] == 1:
                 print('ClICK')
                 self.turn[:] = ['dealer']
+                if self.name == 'Stand':    # checking which button you're clicking
+                    print('s')
+
+
 
         self.screen.blit(self.image, (self.rect.x, self.rect.y))
 
