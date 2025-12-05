@@ -15,6 +15,8 @@ class Game:
         self.user = Player.Player()
         self.cpu = Dealer.Dealer()
         self.turn = ['player']
+        self.list_of_cards = []
+
         self.stand_button = pygame.image.load('Game_Images/stand_button.png').convert_alpha()
         self.stand_button = Button(100, 200, self.stand_button, self.screen, self.turn, 'Stand',self.user)
 
@@ -23,6 +25,9 @@ class Game:
 
         self.lower_bet = pygame.image.load('Game_Images/Minus Button.png').convert_alpha()
         self.lower_bet = Button(100, 300, self.lower_bet, self.screen, self.turn, 'Lower',self.user)
+
+        # self.ss = Spritesheet('Game_Images/Heart Cards.png',self.screen)
+        # image = self.ss.image_at((0,0,0,0))
 
 
     def turn_of_play(self):
@@ -38,6 +43,7 @@ class Game:
                     if keypress[pygame.K_SPACE]:
                         print('players turn to draw a card')
                         self.user.card_picker()
+                        self.card_display(self.user.suit, self.user.card, self.user.number_of_cards)
                     # Above are the functions and methods that the player can call
                     if self.user.card_values > 21:
                         print(f'You lost! Total is {self.user.card_values}.')
@@ -74,8 +80,28 @@ class Game:
             self.lower_bet.draw()
             self.raise_bet.draw()
             # These update the display every 12 frames
+            # self.screen.blit(self.list_of_cards[:], (250,300))
+
             pygame.display.update()
             self.clock.tick(12)
+
+    def card_display(self, suit, card, num_of_cards):
+        if card == 1:
+            self.ss = Spritesheet('Game_Images/Club Cards.png',self.screen)
+            ss = self.ss.image_at((0 + (90 * (card - 1)), 0, 90 * card, 130), num_of_cards)
+            self.list_of_cards.append(ss)
+        elif card == 2:
+            self.ss = Spritesheet('Game_Images/Diamond Cards.png', self.screen)
+            ss = self.ss.image_at((0 + (90 * (card - 1)), 0, 90 * card, 130), num_of_cards)
+            self.list_of_cards.append(ss)
+        elif card == 3:
+            self.ss = Spritesheet('Game_Images/Heart Cards.png', self.screen)
+            ss = self.ss.image_at((0 + (90 * (card - 1)), 0, 90 * card, 130), num_of_cards)
+            self.list_of_cards.append(ss)
+        else:
+            self.ss = Spritesheet('Game_Images/Spade Cards.png', self.screen)
+            ss = self.ss.image_at((0 + (90 * (card - 1)), 0, 90 * card, 130), num_of_cards)
+            self.list_of_cards.append(ss)
 
     def showdown(self):
         if self.user.card_values > 21:
@@ -128,7 +154,18 @@ class Button:
                     print(self.player.bet)
         self.screen.blit(self.image, (self.rect.x, self.rect.y))
 
-
+class Spritesheet:
+    def __init__(self, filename,screen):
+        self.screen = screen
+        try:
+            self.sheet = pygame.image.load(filename).convert_alpha()
+        except pygame.error:
+            print(f'Could not load image {filename}')
+    def image_at(self, rectangle,num_of_cards):
+        rect = pygame.Rect(rectangle)
+        image = pygame.Surface(rect.size).convert()
+        self.screen.blit(self.sheet, (250,300), rect)
+        return image
 
 
 

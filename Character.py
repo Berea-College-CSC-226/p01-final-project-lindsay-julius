@@ -12,10 +12,12 @@ class Character:
         self.number_of_aces = 0
         self.bet = 50
         self.card = 0
+        self.display_card_heart = pygame.image.load('Game_Images/Heart Cards.png').convert_alpha()
+        self.suit = 1
 
     def card_picker(self):
         self.card = random.randint(1,13)
-        suit = random.randint(1,4)
+        self.suit = random.randint(1,4)
         self.number_of_cards += 1
         if self.card == 1:
             print('you drew a {0}'.format(self.card))
