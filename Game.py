@@ -80,7 +80,10 @@ class Game:
             self.lower_bet.draw()
             self.raise_bet.draw()
             # These update the display every 12 frames
-            # self.screen.blit(self.list_of_cards[:], (250,300))
+            # for i in self.list_of_cards:
+            #     length = length(self.list_of_cards)
+            #     self.screen.blit(self.list_of_cards[i], self.list_of_cards.index(i))
+            # TODO This function above may lead to indexing the number of cards in the list (gives us access to remove the images later).
 
             pygame.display.update()
             self.clock.tick(12)
