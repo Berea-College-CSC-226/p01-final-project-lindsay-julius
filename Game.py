@@ -41,7 +41,9 @@ class Game:
                     # Above are the functions and methods that the player can call
                     if self.user.card_values > 21:
                         print(f'You lost! Total is {self.user.card_values}.')
+                        self.user.money -= self.user.bet
                         self.turn[:] = ['game over']
+                        self.turn_of_play()
 
                     if keypress[pygame.K_s]: # s stands fors stand so when the s key is hit it activates
                         self.turn[:] = ['dealer']
@@ -78,14 +80,17 @@ class Game:
     def showdown(self):
         if self.user.card_values > 21:
             print('You Lose!')
+            self.user.money -= self.user.bet
             self.turn[:] = ['game_over']
             self.turn_of_play()
         elif self.user.card_values > self.cpu.card_values or self.cpu.card_values > 21:
             print('You Win!')
+            self.user.money += self.user.bet
             self.turn[:] = ['game_over']
             self.turn_of_play()
         else:
             print('You lose!')
+            self.user.money -= self.user.bet
             self.turn[:] = ['game_over']
             self.turn_of_play()
 
