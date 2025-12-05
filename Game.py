@@ -88,19 +88,19 @@ class Game:
     def card_display(self, suit, card, num_of_cards):
         if card == 1:
             self.ss = Spritesheet('Game_Images/Club Cards.png',self.screen)
-            ss = self.ss.image_at((0 + (90 * (card - 1)), 0, 90 * card, 130), num_of_cards)
+            ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
             self.list_of_cards.append(ss)
         elif card == 2:
             self.ss = Spritesheet('Game_Images/Diamond Cards.png', self.screen)
-            ss = self.ss.image_at((0 + (90 * (card - 1)), 0, 90 * card, 130), num_of_cards)
+            ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
             self.list_of_cards.append(ss)
         elif card == 3:
             self.ss = Spritesheet('Game_Images/Heart Cards.png', self.screen)
-            ss = self.ss.image_at((0 + (90 * (card - 1)), 0, 90 * card, 130), num_of_cards)
+            ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
             self.list_of_cards.append(ss)
         else:
             self.ss = Spritesheet('Game_Images/Spade Cards.png', self.screen)
-            ss = self.ss.image_at((0 + (90 * (card - 1)), 0, 90 * card, 130), num_of_cards)
+            ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
             self.list_of_cards.append(ss)
 
     def showdown(self):
