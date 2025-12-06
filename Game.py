@@ -26,8 +26,8 @@ class Game:
         self.lower_bet = pygame.image.load('Game_Images/Minus Button.png').convert_alpha()
         self.lower_bet = Button(100, 300, self.lower_bet, self.screen, self.turn, 'Lower',self.user)
 
-        # self.ss = Spritesheet('Game_Images/Heart Cards.png',self.screen)
-        # image = self.ss.image_at((0,0,0,0))
+        self.font = pygame.font.SysFont("CourierNew", 50, True)
+        self.txt = self.font.render("Money:" + str(self.user.money), True, "black")
 
 
     def turn_of_play(self):
@@ -64,7 +64,7 @@ class Game:
 
             elif self.turn == ['game_over']:
                 keypress = pygame.key.get_pressed()
-                print('Play again?') # TODO make this only print once not every frame.
+                #print('Play again?') # TODO make this only print once not every frame.
                 if keypress[pygame.K_SPACE]:
                     self.user.bet = 50
                     self.user.card_values = 0
@@ -83,6 +83,9 @@ class Game:
             self.stand_button.draw()
             self.lower_bet.draw()
             self.raise_bet.draw()
+            self.screen.blit(self.txt, ( 500,500 ))
+
+
             # These update the display every 12 frames
             # for i in self.list_of_cards:
             #     length = length(self.list_of_cards)
@@ -179,6 +182,7 @@ class Spritesheet:
 
 
 def main():
+    pygame.font.init()
     game = Game()
     game.turn_of_play()
 
