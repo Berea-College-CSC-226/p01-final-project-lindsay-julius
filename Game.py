@@ -5,7 +5,7 @@
 import pygame, random
 import Character, Player, Dealer
 
-class Game:
+class  Game:
     def __init__(self):
         self.size = (800,600)
         self.running = True
@@ -83,8 +83,10 @@ class Game:
             self.stand_button.draw()
             self.lower_bet.draw()
             self.raise_bet.draw()
-            self.screen.blit(self.txt, ( 500,500 ))
 
+            self.txt = self.font.render("Money:" + str(self.user.money), True, "black")
+            pygame.draw.rect(self.screen, '#00850b',((500,500),(600,600)),0)
+            self.screen.blit(self.txt, ( 500,500 ))
 
             # These update the display every 12 frames
             # for i in self.list_of_cards:
