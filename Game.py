@@ -48,7 +48,7 @@ class Game:
                     if self.user.card_values > 21:
                         print(f'You lost! Total is {self.user.card_values}.')
                         self.user.money -= self.user.bet
-                        self.turn[:] = ['game over']
+                        self.turn[:] = ['game_over']
                         self.turn_of_play()
 
                     if keypress[pygame.K_s]: # s stands fors stand so when the s key is hit it activates
