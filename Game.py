@@ -14,7 +14,7 @@ class Game:
         self.clock = pygame.time.Clock()
         self.user = Player.Player()
         self.cpu = Dealer.Dealer()
-        self.turn = ['player']
+        self.turn = ['betting']
         self.list_of_cards = []
 
         self.stand_button = pygame.image.load('Game_Images/stand_button.png').convert_alpha()
@@ -73,6 +73,10 @@ class Game:
                     self.cpu.card_values = 0
                     self.cpu.number_of_aces = 0
                     self.cpu.number_of_cards = 0
+                    self.turn[:] = ['betting']
+            elif self.turn == ['betting']:
+                keypress = pygame.key.get_pressed()
+                if keypress[pygame.K_SPACE]:
                     self.turn[:] = ['player']
 
             # The functions below add the objects to the screen
@@ -146,15 +150,17 @@ class Button:
                     print('standing')
                     self.turn[:] = ['dealer']
                 if self.name == 'Raise':     # Adds 50 to their bet
-                    self.player.bet += 50
-                    if self.player.bet > self.player.money:
-                        self.player.bet = self.player.money
-                    print(self.player.bet)
+                    if self.turn == ['betting']:
+                        self.player.bet += 50
+                        if self.player.bet > self.player.money:
+                            self.player.bet = self.player.money
+                        print(self.player.bet)
                 if self.name == 'Lower':     # Removes 50 to their bet
-                    self.player.bet -= 50
-                    if self.player.bet < 50:
-                        self.player.bet = 50
-                    print(self.player.bet)
+                    if self.turn == ['betting']:
+                        self.player.bet -= 50
+                        if self.player.bet < 50:
+                            self.player.bet = 50
+                        print(self.player.bet)
         self.screen.blit(self.image, (self.rect.x, self.rect.y))
 
 class Spritesheet:
