@@ -61,6 +61,7 @@ class  Game:
                 self.cpu.dealers_turn()
                 self.showdown()
                 self.turn[:] = ['game_over']
+                # The dealers turn is made entirley through the file, then it compares the numbers through the showdown function.
 
 
             elif self.turn == ['game_over']:
@@ -74,11 +75,14 @@ class  Game:
                     self.cpu.card_values = 0
                     self.cpu.number_of_aces = 0
                     self.cpu.number_of_cards = 0
+                    pygame.draw.rect(self.screen, '#00850b', ((0, 0), (900, 700)), 0)
                     self.turn[:] = ['betting']
+                    # Resets every attribute except the money the player has. Also clears the screen.
             elif self.turn == ['betting']:
                 keypress = pygame.key.get_pressed()
                 if keypress[pygame.K_SPACE]:
                     self.turn[:] = ['player']
+                    # Changes the turn-off of the betting turn once the space bar is pressed
 
             # The functions below add the objects to the screen
             self.stand_button.draw()
@@ -88,8 +92,9 @@ class  Game:
             self.money_txt = self.font.render("Money:" + str(self.user.money), True, "black")
             self.bet_txt = self.font.render("Current Bet:" + str(self.user.bet), True, "black")
 
+            # Below clears the screen of the text variables, then readds the text onto the screen.
             pygame.draw.rect(self.screen, '#00850b',((500,500),(600,600)),0)
-            pygame.draw.rect(self.screen, '#00850b', ((0, 0), (100, 100)), 0)
+            pygame.draw.rect(self.screen, '#00850b', ((0, 0), (500, 50)), 0)
             self.screen.blit(self.money_txt, (600, 625))
             self.screen.blit(self.bet_txt, (0, 0))
 
@@ -105,19 +110,19 @@ class  Game:
 
     def card_display(self, suit, card, num_of_cards):
         if card == 1:
-            self.ss = Spritesheet('Game_Images/Club Cards.png',self.screen)
+            self.ss = Spritesheet('Game_Images/Club Cards.png',self.screen,self.user.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
             self.list_of_cards.append(ss)
         elif card == 2:
-            self.ss = Spritesheet('Game_Images/Diamond Cards.png', self.screen)
+            self.ss = Spritesheet('Game_Images/Diamond Cards.png', self.screen,self.user.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
             self.list_of_cards.append(ss)
         elif card == 3:
-            self.ss = Spritesheet('Game_Images/Heart Cards.png', self.screen)
+            self.ss = Spritesheet('Game_Images/Heart Cards.png', self.screen,self.user.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
             self.list_of_cards.append(ss)
         else:
-            self.ss = Spritesheet('Game_Images/Spade Cards.png', self.screen)
+            self.ss = Spritesheet('Game_Images/Spade Cards.png', self.screen,self.user.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
             self.list_of_cards.append(ss)
 
@@ -175,8 +180,9 @@ class Button:
         self.screen.blit(self.image, (self.rect.x, self.rect.y))
 
 class Spritesheet:
-    def __init__(self, filename,screen):
+    def __init__(self, filename,screen, number_of_cards):
         self.screen = screen
+        self.number_of_cards = number_of_cards
         try:
             self.sheet = pygame.image.load(filename).convert_alpha()
         except pygame.error:
@@ -184,7 +190,7 @@ class Spritesheet:
     def image_at(self, rectangle,num_of_cards):
         rect = pygame.Rect(rectangle)
         image = pygame.Surface(rect.size).convert()
-        self.screen.blit(self.sheet, (250,300), rect)
+        self.screen.blit(self.sheet, (250 + (50 * self.number_of_cards),300), rect)
         return image
 
 
