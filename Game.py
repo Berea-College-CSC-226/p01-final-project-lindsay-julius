@@ -7,7 +7,7 @@ import Character, Player, Dealer
 
 class  Game:
     def __init__(self):
-        self.size = (800,600)
+        self.size = (900,700)
         self.running = True
         self.screen = pygame.display.set_mode(self.size)
         self.screen.fill('#00850b')
@@ -18,16 +18,17 @@ class  Game:
         self.list_of_cards = []
 
         self.stand_button = pygame.image.load('Game_Images/stand_button.png').convert_alpha()
-        self.stand_button = Button(100, 200, self.stand_button, self.screen, self.turn, 'Stand',self.user)
+        self.stand_button = Button(25, 200, self.stand_button, self.screen, self.turn, 'Stand',self.user)
 
         self.raise_bet = pygame.image.load('Game_Images/Plus Button.png').convert_alpha()
-        self.raise_bet = Button(100, 400, self.raise_bet, self.screen, self.turn, 'Raise',self.user)
+        self.raise_bet = Button(150, 75, self.raise_bet, self.screen, self.turn, 'Raise',self.user)
 
         self.lower_bet = pygame.image.load('Game_Images/Minus Button.png').convert_alpha()
-        self.lower_bet = Button(100, 300, self.lower_bet, self.screen, self.turn, 'Lower',self.user)
+        self.lower_bet = Button(0, 75, self.lower_bet, self.screen, self.turn, 'Lower',self.user)
 
         self.font = pygame.font.SysFont("CourierNew", 50, True)
-        self.txt = self.font.render("Money:" + str(self.user.money), True, "black")
+        self.money_txt = self.font.render("Money:" + str(self.user.money), True, "black")
+        self.bet_txt = self.font.render("Bet:" + str(self.user.bet), True, "black")
 
 
     def turn_of_play(self):
@@ -84,9 +85,14 @@ class  Game:
             self.lower_bet.draw()
             self.raise_bet.draw()
 
-            self.txt = self.font.render("Money:" + str(self.user.money), True, "black")
+            self.money_txt = self.font.render("Money:" + str(self.user.money), True, "black")
+            self.bet_txt = self.font.render("Current Bet:" + str(self.user.bet), True, "black")
+
             pygame.draw.rect(self.screen, '#00850b',((500,500),(600,600)),0)
-            self.screen.blit(self.txt, ( 500,500 ))
+            pygame.draw.rect(self.screen, '#00850b', ((0, 0), (100, 100)), 0)
+            self.screen.blit(self.money_txt, (600, 625))
+            self.screen.blit(self.bet_txt, (0, 0))
+
 
             # These update the display every 12 frames
             # for i in self.list_of_cards:
