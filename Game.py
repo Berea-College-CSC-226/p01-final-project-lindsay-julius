@@ -29,6 +29,8 @@ class  Game:
         self.font = pygame.font.SysFont("CourierNew", 50, True)
         self.money_txt = self.font.render("Money:" + str(self.user.money), True, "black")
         self.bet_txt = self.font.render("Bet:" + str(self.user.bet), True, "black")
+        self.altfont = pygame.font.SysFont("TimesNewRoman", 25, True)
+        self.help_txt = self.altfont.render("Select the amount to bet, then press Space!", True, "darkblue")
 
 
     def turn_of_play(self):
@@ -40,24 +42,27 @@ class  Game:
 
             if  self.turn[:] == ['player']:
                 # if event.type == pygame.KEYDOWN:
-                    keypress = pygame.key.get_pressed()
-                    if keypress[pygame.K_SPACE]:
-                        print('players turn to draw a card')
-                        self.user.card_picker()
-                        self.card_display(self.user.suit, self.user.card, self.user.number_of_cards)
-                    # Above are the functions and methods that the player can call
-                    if self.user.card_values > 21:
-                        print(f'You lost! Total is {self.user.card_values}.')
-                        self.user.money -= self.user.bet
-                        self.turn[:] = ['game_over']
-                        self.turn_of_play()
+                self.help_txt = self.altfont.render("Press Space to HIT!", True, "darkblue")
 
-                    if keypress[pygame.K_s]: # s stands fors stand so when the s key is hit it activates
-                        self.turn[:] = ['dealer']
+                keypress = pygame.key.get_pressed()
+                if keypress[pygame.K_SPACE]:
+                    print('players turn to draw a card')
+                    self.user.card_picker()
+                    self.card_display(self.user.suit, self.user.card, self.user.number_of_cards)
+                # Above are the functions and methods that the player can call
+                if self.user.card_values > 21:
+                    print(f'You lost! Total is {self.user.card_values}.')
+                    self.user.money -= self.user.bet
+                    self.turn[:] = ['game_over']
+                    self.turn_of_play()
+
+                if keypress[pygame.K_s]: # s stands fors stand so when the s key is hit it activates
+                    self.turn[:] = ['dealer']
 
 
             elif self.turn == ['dealer']:
                 print("Dealer's turn..")
+                self.help_txt = self.altfont.render("", True, "darkblue")
                 self.cpu.dealers_turn()
                 self.showdown()
                 self.turn[:] = ['game_over']
@@ -65,19 +70,24 @@ class  Game:
 
 
             elif self.turn == ['game_over']:
-                keypress = pygame.key.get_pressed()
-                #print('Play again?') # TODO make this only print once not every frame.
-                if keypress[pygame.K_SPACE]:
-                    self.user.bet = 50
-                    self.user.card_values = 0
-                    self.user.number_of_aces = 0
-                    self.user.number_of_cards = 0
-                    self.cpu.card_values = 0
-                    self.cpu.number_of_aces = 0
-                    self.cpu.number_of_cards = 0
-                    pygame.draw.rect(self.screen, '#00850b', ((0, 0), (900, 700)), 0)
-                    self.turn[:] = ['betting']
-                    # Resets every attribute except the money the player has. Also clears the screen.
+                if self.user.money > 0:
+                    self.help_txt = self.altfont.render("Press Space to Play Again!", True, "darkblue")
+                    keypress = pygame.key.get_pressed()
+                    #print('Play again?') # TODO make this only print once not every frame.
+                    if keypress[pygame.K_SPACE]:
+                        self.user.bet = 50
+                        self.user.card_values = 0
+                        self.user.number_of_aces = 0
+                        self.user.number_of_cards = 0
+                        self.cpu.card_values = 0
+                        self.cpu.number_of_aces = 0
+                        self.cpu.number_of_cards = 0
+                        pygame.draw.rect(self.screen, '#00850b', ((0, 0), (900, 700)), 0)
+                        self.turn[:] = ['betting']
+                        # Resets every attribute except the money the player has. Also clears the screen.
+                else:
+                    self.help_txt = self.altfont.render("Uh oh You've Ran out of Money!!!", True,"darkblue")
+
             elif self.turn == ['betting']:
                 keypress = pygame.key.get_pressed()
                 if keypress[pygame.K_SPACE]:
@@ -95,8 +105,10 @@ class  Game:
             # Below clears the screen of the text variables, then readds the text onto the screen.
             pygame.draw.rect(self.screen, '#00850b',((500,500),(600,600)),0)
             pygame.draw.rect(self.screen, '#00850b', ((0, 0), (500, 50)), 0)
+            pygame.draw.rect(self.screen, '#00850b', ((0, 625), (500, 625)), 0)
             self.screen.blit(self.money_txt, (600, 625))
             self.screen.blit(self.bet_txt, (0, 0))
+            self.screen.blit(self.help_txt, (0, 625))
 
 
             # These update the display every 12 frames
