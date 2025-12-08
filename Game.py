@@ -2,7 +2,7 @@
 
 
 '''
-import pygame, random
+import pygame, random, time
 import Character, Player, Dealer
 
 class  Game:
@@ -31,6 +31,7 @@ class  Game:
         self.bet_txt = self.font.render("Bet:" + str(self.user.bet), True, "black")
         self.altfont = pygame.font.SysFont("TimesNewRoman", 25, True)
         self.help_txt = self.altfont.render("Select the amount to bet, then press Space!", True, "darkblue")
+        self.end_txt = self.altfont.render("You Lose!", True, "black")
 
 
     def turn_of_play(self):
@@ -48,27 +49,28 @@ class  Game:
                 if keypress[pygame.K_SPACE]:
                     print('players turn to draw a card')
                     self.user.card_picker()
+                    time.sleep(0.25)
                     self.card_display_player(self.user.suit, self.user.card, self.user.number_of_cards)
                 # Above are the functions and methods that the player can call
                 if self.user.card_values > 21:
-                    print(f'You lost! Total is {self.user.card_values}.')
-                    self.user.money -= self.user.bet
-                    self.turn[:] = ['game_over']
-                    self.turn_of_play()
+                    self.showdown()
+                    # Triggers the end of the game
 
-                if keypress[pygame.K_s]: # s stands fors stand so when the s key is hit it activates
+                if keypress[pygame.K_s] or keypress[pygame.K_RETURN]: # s stands fors stand so when the s key is hit it activates
                     self.turn[:] = ['dealer']
-                    # self.card_display_player(self.user.suit, self.user.card, self.user.number_of_cards)
 
             elif self.turn == ['dealer']:
                 print("Dealer's turn..")
                 self.help_txt = self.altfont.render("", True, "darkblue")
-                while self.cpu.card_values < 16:
+                while self.cpu.card_values <= 16:
                     self.cpu.card_picker()
                     self.card_display_dealer(self.cpu.suit, self.cpu.card, self.cpu.number_of_cards)
+                    time.sleep(0.25)
+                    pygame.display.update()
+                    self.clock.tick(12)
+                    #Updates the display since it will be stuck in a while loop
                 self.showdown()
                 self.turn[:] = ['game_over']
-                # The dealers turn is made entirley through the file, then it compares the numbers through the showdown function.
 
 
             elif self.turn == ['game_over']:
@@ -93,6 +95,8 @@ class  Game:
             elif self.turn == ['betting']:
                 keypress = pygame.key.get_pressed()
                 if keypress[pygame.K_SPACE]:
+                    self.cpu.card_picker()
+                    self.card_display_dealer(self.cpu.suit, self.cpu.card, self.cpu.number_of_cards)
                     self.turn[:] = ['player']
                     # Changes the turn-off of the betting turn once the space bar is pressed
 
@@ -133,7 +137,7 @@ class  Game:
             self.ss = Spritesheet('Game_Images/Spade Cards.png', self.screen,self.user.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
             self.list_of_cards.append(ss)
-
+        # Sets the image using a spritesheet before creating a pygame rectange with the dimensions of a card.
     def card_display_dealer(self, suit, card, num_of_cards):
         if card == 1:
             self.ss = Spritesheet_Dealer('Game_Images/Club Cards.png',self.screen,self.cpu.number_of_cards)
@@ -151,20 +155,25 @@ class  Game:
             self.ss = Spritesheet_Dealer('Game_Images/Spade Cards.png', self.screen,self.cpu.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
             self.list_of_cards.append(ss)
+        # The dealer uses a different function because it needs to position the cards differently.
 
     def showdown(self):
+        # Handles all the value changes and end text before switching it to the end turns.
         if self.user.card_values > 21:
-            print('You Lose!')
+            self.end_txt = self.altfont.render(f'You lost! total hand is {self.user.card_values}.', True, "black")
+            self.screen.blit(self.end_txt, (550, 300))
             self.user.money -= self.user.bet
             self.turn[:] = ['game_over']
             self.turn_of_play()
         elif self.user.card_values > self.cpu.card_values or self.cpu.card_values > 21:
-            print('You Win!')
+            self.end_txt = self.altfont.render("You Win!", True, "black")
+            self.screen.blit(self.end_txt, (550, 300))
             self.user.money += self.user.bet
             self.turn[:] = ['game_over']
             self.turn_of_play()
         else:
-            print('You lose!')
+            self.end_txt = self.altfont.render("You Lose!", True, "black")
+            self.screen.blit(self.end_txt, (550, 300))
             self.user.money -= self.user.bet
             self.turn[:] = ['game_over']
             self.turn_of_play()
@@ -221,6 +230,7 @@ class Spritesheet:
         return image
 
 class Spritesheet_Dealer(Spritesheet):
+    # The dealer needs a separate spritesheet so it can position the cards differently.
     def __init__(self, filename, screen, number_of_cards):
         super().__init__(filename,screen, number_of_cards)
     def image_at(self, rectangle,num_of_cards):
