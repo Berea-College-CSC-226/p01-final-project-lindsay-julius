@@ -58,14 +58,14 @@ class  Game:
 
                 if keypress[pygame.K_s]: # s stands fors stand so when the s key is hit it activates
                     self.turn[:] = ['dealer']
-
+                    # self.card_display_player(self.user.suit, self.user.card, self.user.number_of_cards)
 
             elif self.turn == ['dealer']:
                 print("Dealer's turn..")
                 self.help_txt = self.altfont.render("", True, "darkblue")
                 while self.cpu.card_values < 16:
                     self.cpu.card_picker()
-
+                    self.card_display_dealer(self.cpu.suit, self.cpu.card, self.cpu.number_of_cards)
                 self.showdown()
                 self.turn[:] = ['game_over']
                 # The dealers turn is made entirley through the file, then it compares the numbers through the showdown function.
@@ -75,7 +75,6 @@ class  Game:
                 if self.user.money > 0:
                     self.help_txt = self.altfont.render("Press Space to Play Again!", True, "darkblue")
                     keypress = pygame.key.get_pressed()
-                    #print('Play again?') # TODO make this only print once not every frame.
                     if keypress[pygame.K_SPACE]:
                         self.user.bet = 50
                         self.user.card_values = 0
@@ -85,6 +84,7 @@ class  Game:
                         self.cpu.number_of_aces = 0
                         self.cpu.number_of_cards = 0
                         pygame.draw.rect(self.screen, '#00850b', ((0, 0), (900, 700)), 0)
+                        self.help_txt = self.altfont.render("Select the amount to bet, then press Space!", True,"darkblue")
                         self.turn[:] = ['betting']
                         # Resets every attribute except the money the player has. Also clears the screen.
                 else:
@@ -112,13 +112,7 @@ class  Game:
             self.screen.blit(self.bet_txt, (0, 0))
             self.screen.blit(self.help_txt, (0, 625))
 
-
-            # These update the display every 12 frames
-            # for i in self.list_of_cards:
-            #     length = length(self.list_of_cards)
-            #     self.screen.blit(self.list_of_cards[i], self.list_of_cards.index(i))
-            # TODO This function above may lead to indexing the number of cards in the list (gives us access to remove the images later).
-
+            #This updates the screen with all the new information
             pygame.display.update()
             self.clock.tick(12)
 
@@ -137,6 +131,24 @@ class  Game:
             self.list_of_cards.append(ss)
         else:
             self.ss = Spritesheet('Game_Images/Spade Cards.png', self.screen,self.user.number_of_cards)
+            ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
+            self.list_of_cards.append(ss)
+
+    def card_display_dealer(self, suit, card, num_of_cards):
+        if card == 1:
+            self.ss = Spritesheet_Dealer('Game_Images/Club Cards.png',self.screen,self.cpu.number_of_cards)
+            ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
+            self.list_of_cards.append(ss)
+        elif card == 2:
+            self.ss = Spritesheet_Dealer('Game_Images/Diamond Cards.png', self.screen,self.cpu.number_of_cards)
+            ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
+            self.list_of_cards.append(ss)
+        elif card == 3:
+            self.ss = Spritesheet_Dealer('Game_Images/Heart Cards.png', self.screen,self.cpu.number_of_cards)
+            ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
+            self.list_of_cards.append(ss)
+        else:
+            self.ss = Spritesheet_Dealer('Game_Images/Spade Cards.png', self.screen,self.cpu.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
             self.list_of_cards.append(ss)
 
@@ -205,10 +217,17 @@ class Spritesheet:
     def image_at(self, rectangle,num_of_cards):
         rect = pygame.Rect(rectangle)
         image = pygame.Surface(rect.size).convert()
-        self.screen.blit(self.sheet, (250 + (50 * self.number_of_cards),300), rect)
+        self.screen.blit(self.sheet, (300 + (50 * self.number_of_cards),350), rect)
         return image
 
-
+class Spritesheet_Dealer(Spritesheet):
+    def __init__(self, filename, screen, number_of_cards):
+        super().__init__(filename,screen, number_of_cards)
+    def image_at(self, rectangle,num_of_cards):
+        rect = pygame.Rect(rectangle)
+        image = pygame.Surface(rect.size).convert()
+        self.screen.blit(self.sheet, (300 + (50 * self.number_of_cards), 150), rect)
+        return image
 
 def main():
     pygame.font.init()
