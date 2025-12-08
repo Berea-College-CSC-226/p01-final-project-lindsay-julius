@@ -48,7 +48,7 @@ class  Game:
                 if keypress[pygame.K_SPACE]:
                     print('players turn to draw a card')
                     self.user.card_picker()
-                    self.card_display(self.user.suit, self.user.card, self.user.number_of_cards)
+                    self.card_display_player(self.user.suit, self.user.card, self.user.number_of_cards)
                 # Above are the functions and methods that the player can call
                 if self.user.card_values > 21:
                     print(f'You lost! Total is {self.user.card_values}.')
@@ -63,7 +63,9 @@ class  Game:
             elif self.turn == ['dealer']:
                 print("Dealer's turn..")
                 self.help_txt = self.altfont.render("", True, "darkblue")
-                self.cpu.dealers_turn()
+                while self.cpu.card_values < 16:
+                    self.cpu.card_picker()
+
                 self.showdown()
                 self.turn[:] = ['game_over']
                 # The dealers turn is made entirley through the file, then it compares the numbers through the showdown function.
@@ -120,7 +122,7 @@ class  Game:
             pygame.display.update()
             self.clock.tick(12)
 
-    def card_display(self, suit, card, num_of_cards):
+    def card_display_player(self, suit, card, num_of_cards):
         if card == 1:
             self.ss = Spritesheet('Game_Images/Club Cards.png',self.screen,self.user.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
@@ -175,8 +177,9 @@ class Button:
         if self.rect.collidepoint(pos):   # this is the click function
             if pygame.mouse.get_pressed()[0] == 1:
                 if self.name == 'Stand':    # checking which button you're clicking
-                    print('standing')
-                    self.turn[:] = ['dealer']
+                    if self.turn == ['player']:
+                        print('standing')
+                        self.turn[:] = ['dealer']
                 if self.name == 'Raise':     # Adds 50 to their bet
                     if self.turn == ['betting']:
                         self.player.bet += 50
