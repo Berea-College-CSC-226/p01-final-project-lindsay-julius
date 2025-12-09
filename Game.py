@@ -22,7 +22,7 @@ class  Game:
         self.stand_button = Button(25, 200, self.stand_button, self.screen, self.turn, 'Stand',self.user)
 
         #set up for Hit button
-        self.hit_img = pygame.image.load('Game_Images/stand_button.png').convert_alpha()
+        self.hit_img = pygame.image.load('Game_Images/Hit_Button.png').convert_alpha()
         self.hit_button = Button(25, 325, self.hit_img, self.screen, self.turn, 'Hit', self.user)
 
         self.raise_bet = pygame.image.load('Game_Images/Plus Button.png').convert_alpha()
