@@ -17,8 +17,13 @@ class  Game:
         self.turn = ['betting']
         self.list_of_cards = []
 
+        #set up for Stand Button
         self.stand_button = pygame.image.load('Game_Images/stand_button.png').convert_alpha()
         self.stand_button = Button(25, 200, self.stand_button, self.screen, self.turn, 'Stand',self.user)
+
+        #set up for Hit button
+        self.hit_img = pygame.image.load('Game_Images/stand_button.png').convert_alpha()
+        self.hit_button = Button(25, 325, self.hit_img, self.screen, self.turn, 'Hit', self.user)
 
         self.raise_bet = pygame.image.load('Game_Images/Plus Button.png').convert_alpha()
         self.raise_bet = Button(150, 75, self.raise_bet, self.screen, self.turn, 'Raise',self.user)
@@ -43,19 +48,19 @@ class  Game:
 
             if  self.turn[:] == ['player']:
                 # if event.type == pygame.KEYDOWN:
-                self.help_txt = self.altfont.render("Press Space to HIT!", True, "darkblue")
+                self.help_txt = self.altfont.render("Press Hit button to Hit!", True, "darkblue")
 
-                keypress = pygame.key.get_pressed()
-                if keypress[pygame.K_SPACE]:
-                    print('players turn to draw a card')
-                    self.user.card_picker()
-                    time.sleep(0.25)
-                    self.card_display_player(self.user.suit, self.user.card, self.user.number_of_cards)
+                # keypress = pygame.key.get_pressed()
+                # if keypress[pygame.K_SPACE]:
+                #     print('players turn to draw a card')
+                #     self.user.card_picker()
+                #     time.sleep(0.25)
+                #     self.card_display_player(self.user.suit, self.user.card, self.user.number_of_cards)
                 # Above are the functions and methods that the player can call
                 if self.user.card_values > 21:
                     self.showdown()
                     # Triggers the end of the game
-
+                keypress = pygame.key.get_pressed()
                 if keypress[pygame.K_s] or keypress[pygame.K_RETURN]: # s stands fors stand so when the s key is hit it activates
                     self.turn[:] = ['dealer']
 
@@ -108,9 +113,18 @@ class  Game:
                     # Changes the turn-off of the betting turn once the space bar is pressed
 
             # The functions below add the objects to the screen
-            self.stand_button.draw()
-            self.lower_bet.draw()
-            self.raise_bet.draw()
+            pygame.draw.rect(self.screen, '#00850b', ((0, 50), (280, 450)), 0)
+            self.stand_button.draw(self.turn)
+
+            # Hit button , The .draw() method now returns True if clicked
+            if self.hit_button.draw(self.turn) == True:
+                print('players turn to draw a card')
+                self.user.card_picker()
+                time.sleep(0.25)
+                self.card_display_player(self.user.suit, self.user.card, self.user.number_of_cards)
+
+            self.lower_bet.draw(self.turn)
+            self.raise_bet.draw(self.turn)
 
             self.money_txt = self.font.render("Money:" + str(self.user.money), True, "black")
             self.bet_txt = self.font.render("Current Bet:" + str(self.user.bet), True, "black")
@@ -205,14 +219,21 @@ class Button:
         self.name = name
         self.player = player
 
-    def draw(self):
-        # If this is the 'Stand' button, ONLY draw it if it's the player's turn
-        if self.name == 'Stand' and self.turn != ['player']:
-            return  # Skip the rest of the function (don't draw, don't check clicks)
+    def draw(self,current_turn):
+        self.turn = current_turn
+        #Hides Hit and Stand if NOT player turn
+        if (self.name == 'Stand' or self.name == 'Hit') and self.turn != ['player']:
+            return False
+
+        #Hides Raise/Lower if NOT betting turn
+        if (self.name == 'Raise' or self.name == 'Lower') and self.turn != ['betting']:
+            return False
         pos = pygame.mouse.get_pos()
 
         if self.rect.collidepoint(pos):   # this is the click function
             if pygame.mouse.get_pressed()[0] == 1:
+                if self.name == 'Hit':
+                    return True # We return True so the loop knows to draw a card
                 if self.name == 'Stand':    # checking which button you're clicking
                     if self.turn == ['player']:
                         print('standing')
@@ -230,6 +251,7 @@ class Button:
                             self.player.bet = 50
                         print(self.player.bet)
         self.screen.blit(self.image, (self.rect.x, self.rect.y))
+        return False
 
 class Spritesheet:
     def __init__(self, filename,screen, number_of_cards):
