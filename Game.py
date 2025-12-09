@@ -115,8 +115,16 @@ class  Game:
             self.money_txt = self.font.render("Money:" + str(self.user.money), True, "black")
             self.bet_txt = self.font.render("Current Bet:" + str(self.user.bet), True, "black")
 
+
+            pygame.draw.rect(self.screen, '#00850b', ((300, 500), (500, 80)), 0)
+
+            # 2. Only show the count if we are NOT in the betting phase
+            if self.turn != ['betting']:
+                self.hand_txt = self.font.render("Hand:" + str(self.user.card_values), True, "black")
+                self.screen.blit(self.hand_txt, (300, 500))
+
             # Below clears the screen of the text variables, then readds the text onto the screen.
-            pygame.draw.rect(self.screen, '#00850b',((500,500),(600,600)),0)
+            pygame.draw.rect(self.screen, '#00850b',((500,600),(600,100)),0)
             pygame.draw.rect(self.screen, '#00850b', ((0, 0), (500, 50)), 0)
             pygame.draw.rect(self.screen, '#00850b', ((0, 625), (500, 625)), 0)
             self.screen.blit(self.money_txt, (600, 625))
