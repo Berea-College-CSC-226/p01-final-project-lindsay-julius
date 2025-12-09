@@ -44,8 +44,6 @@ class Character:
             self.suit = 5
             if self.bet < 0:
                 self.bet = 50
-        print("suit = " + str(self.suit))
-        print("card no. = " + str(self.card))
         if self.card_values > 21:
             if self.number_of_aces >= 1:
                 self.card_values -= 10
