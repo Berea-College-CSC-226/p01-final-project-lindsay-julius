@@ -151,32 +151,37 @@ class  Game:
             self.clock.tick(12)
 
     def card_display_player(self, suit, card, num_of_cards):
-        if card == 1:
+        if suit == 1:
             self.ss = Spritesheet('Game_Images/Club Cards.png',self.screen,self.user.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
-        elif card == 2:
+        elif suit == 2:
             self.ss = Spritesheet('Game_Images/Diamond Cards.png', self.screen,self.user.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
-        elif card == 3:
+        elif suit == 3:
             self.ss = Spritesheet('Game_Images/Heart Cards.png', self.screen,self.user.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
-        else:
+        elif suit == 4:
             self.ss = Spritesheet('Game_Images/Spade Cards.png', self.screen,self.user.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
+        elif suit == 5:
+            self.ss = Spritesheet('Game_Images/Special Cards.png', self.screen,self.user.number_of_cards)
+            ss = self.ss.image_at((0 + (90 * (card - 1)), 0, 90, 130), num_of_cards)
         # Sets the image using a spritesheet before creating a pygame rectange with the dimensions of a card.
     def card_display_dealer(self, suit, card, num_of_cards):
-        if card == 1:
+        if suit == 1:
             self.ss = Spritesheet_Dealer('Game_Images/Club Cards.png',self.screen,self.cpu.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
-        elif card == 2:
+        elif suit == 2:
             self.ss = Spritesheet_Dealer('Game_Images/Diamond Cards.png', self.screen,self.cpu.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
-        elif card == 3:
+        elif suit == 3:
             self.ss = Spritesheet_Dealer('Game_Images/Heart Cards.png', self.screen,self.cpu.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
-        else:
+        elif suit == 4:
             self.ss = Spritesheet_Dealer('Game_Images/Spade Cards.png', self.screen,self.cpu.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
+        else:
+            pass
         # The dealer uses a different function because it needs to position the cards differently.
 
     def showdown(self):

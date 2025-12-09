@@ -16,17 +16,36 @@ class Character:
         self.suit = 1
 
     def card_picker(self):
-        self.card = random.randint(1,13)
-        self.suit = random.randint(1,4)
+        self.card = random.randint(1,17) # Cards 1-13 are normal while 14, 15, 16, and 17 are special
+        self.suit = random.randint(1,4)  # Suit no. 5 is for special cards only.
         self.number_of_cards += 1
         if self.card == 1:
             self.number_of_aces += 1
             self.card_values += 11
         elif 1 < self.card <= 10:
             self.card_values += self.card
-        else:
+        elif 10 < self.card < 14:
             self.card_values += 10
-
+        elif self.card == 14:
+            # Give more money
+            self.money += 500
+            self.suit = 5
+        elif self.card == 15:
+            # Removes your money
+            self.money -= 250
+            self.suit = 5
+        elif self.card == 16:
+            # Adds more to your bet
+            self.bet += 250
+            self.suit = 5
+        elif self.card == 17:
+            # Removes some money from your bet
+            self.bet -= 250
+            self.suit = 5
+            if self.bet < 0:
+                self.bet = 50
+        print("suit = " + str(self.suit))
+        print("card no. = " + str(self.card))
         if self.card_values > 21:
             if self.number_of_aces >= 1:
                 self.card_values -= 10
