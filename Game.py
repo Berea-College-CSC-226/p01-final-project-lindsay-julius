@@ -103,11 +103,11 @@ class  Game:
                     self.cpu.card_picker()
                     self.card_display_dealer(self.cpu.suit, self.cpu.card, self.cpu.number_of_cards)
 
-                    # for i in range(2):
-                    #     self.user.card_picker()
-                    #     self.card_display_dealer(self.user.suit, self.user.card, self.user.number_of_cards)
-                    #     pygame.display.update()
-                    #     time.sleep(0.2)
+                    for i in range(2):
+                        self.user.card_picker()
+                        self.card_display_player(self.user.suit, self.user.card, self.user.number_of_cards)
+                        pygame.display.update()
+                        time.sleep(0.2)
 
                     self.turn[:] = ['player']
                     # Changes the turn-off of the betting turn once the space bar is pressed
