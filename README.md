@@ -57,6 +57,8 @@ section as you go. DO NOT forget about it!
 - https://www.pygame.org/docs/
 - https://docs.python.org/3/library/unittest.html
 - https://www.youtube.com/watch?v=G8MYGDf_9ho (For learning how to add buttons to the screen)
+- https://www.pygame.org/wiki/Spritesheet
+- 
 
 ---
 
