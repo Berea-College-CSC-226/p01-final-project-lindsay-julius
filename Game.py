@@ -48,14 +48,6 @@ class  Game:
             if  self.turn[:] == ['player']:
                 # if event.type == pygame.KEYDOWN:
                 self.help_txt = self.altfont.render("Press Hit button to Hit!", True, "lightgray")
-
-                # keypress = pygame.key.get_pressed()
-                # if keypress[pygame.K_SPACE]:
-                #     print('players turn to draw a card')
-                #     self.user.card_picker()
-                #     time.sleep(0.25)
-                #     self.card_display_player(self.user.suit, self.user.card, self.user.number_of_cards)
-                # Above are the functions and methods that the player can call
                 if self.user.card_values > 21:
                     self.showdown()
                     # Triggers the end of the game
@@ -64,7 +56,6 @@ class  Game:
                     self.turn[:] = ['dealer']
 
             elif self.turn == ['dealer']:
-                print("Dealer's turn..")
                 self.help_txt = self.altfont.render("", True, "lightgray")
                 while self.cpu.card_values <= 16:
                     self.cpu.card_picker()
@@ -129,7 +120,6 @@ class  Game:
 
             # Hit button , The .draw() method now returns True if clicked
             if self.hit_button.draw(self.turn) == True:
-                print('players turn to draw a card')
                 self.user.card_picker()
                 time.sleep(0.25)
                 self.card_display_player(self.user.suit, self.user.card, self.user.number_of_cards)
@@ -239,20 +229,17 @@ class Button:
                     return True # We return True so the loop knows to draw a card
                 if self.name == 'Stand':    # checking which button you're clicking
                     if self.turn == ['player']:
-                        print('standing')
                         self.turn[:] = ['dealer']
                 if self.name == 'Raise':     # Adds 50 to their bet
                     if self.turn == ['betting']:
                         self.player.bet += 50
                         if self.player.bet > self.player.money:
                             self.player.bet = self.player.money
-                        print(self.player.bet)
                 if self.name == 'Lower':     # Removes 50 to their bet
                     if self.turn == ['betting']:
                         self.player.bet -= 50
                         if self.player.bet < 50:
                             self.player.bet = 50
-                        print(self.player.bet)
         self.screen.blit(self.image, (self.rect.x, self.rect.y))
         return False
 
