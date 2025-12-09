@@ -5,9 +5,6 @@ import Character
 class Dealer(Character.Character):
     def __init__(self):
         super().__init__()
-    def dealers_turn(self):
-        while self.card_values <= 16:
-            self.card_picker()
 
     def card_picker(self):
         self.card = random.randint(1, 13)  # Cards 1-13 The cpu has no access to the special cards.
@@ -26,8 +23,3 @@ class Dealer(Character.Character):
                 self.number_of_aces -= 1
             else:
                 return
-
-
-
-# dealer = Dealer()
-# dealer.dealers_turn()
