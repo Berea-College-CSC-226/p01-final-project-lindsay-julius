@@ -10,12 +10,11 @@ class  Game:
         self.size = (900,700)
         self.running = True
         self.screen = pygame.display.set_mode(self.size)
-        self.screen.fill('#00850b')
+        self.screen.fill('#1a6633')
         self.clock = pygame.time.Clock()
         self.user = Player.Player()
         self.cpu = Dealer.Dealer()
         self.turn = ['betting']
-        self.list_of_cards = []
 
         #set up for Stand Button
         self.stand_button = pygame.image.load('Game_Images/stand_button.png').convert_alpha()
@@ -35,7 +34,7 @@ class  Game:
         self.money_txt = self.font.render("Money:" + str(self.user.money), True, "black")
         self.bet_txt = self.font.render("Bet:" + str(self.user.bet), True, "black")
         self.altfont = pygame.font.SysFont("TimesNewRoman", 25, True)
-        self.help_txt = self.altfont.render("Select the amount to bet, then press Space!", True, "darkblue")
+        self.help_txt = self.altfont.render("Select the amount to bet, then press Space!", True, "lightgray")
         self.end_txt = self.altfont.render("You Lose!", True, "black")
 
 
@@ -48,7 +47,7 @@ class  Game:
 
             if  self.turn[:] == ['player']:
                 # if event.type == pygame.KEYDOWN:
-                self.help_txt = self.altfont.render("Press Hit button to Hit!", True, "darkblue")
+                self.help_txt = self.altfont.render("Press Hit button to Hit!", True, "lightgray")
 
                 # keypress = pygame.key.get_pressed()
                 # if keypress[pygame.K_SPACE]:
@@ -66,7 +65,7 @@ class  Game:
 
             elif self.turn == ['dealer']:
                 print("Dealer's turn..")
-                self.help_txt = self.altfont.render("", True, "darkblue")
+                self.help_txt = self.altfont.render("", True, "lightgray")
                 while self.cpu.card_values <= 16:
                     self.cpu.card_picker()
                     self.card_display_dealer(self.cpu.suit, self.cpu.card, self.cpu.number_of_cards)
@@ -80,7 +79,7 @@ class  Game:
 
             elif self.turn == ['game_over']:
                 if self.user.money > 0:
-                    self.help_txt = self.altfont.render("Press Space to Play Again!", True, "darkblue")
+                    self.help_txt = self.altfont.render("Press Space to Play Again!", True, "lightgray")
                     keypress = pygame.key.get_pressed()
                     if keypress[pygame.K_SPACE]:
                         self.user.bet = 50
@@ -90,13 +89,25 @@ class  Game:
                         self.cpu.card_values = 0
                         self.cpu.number_of_aces = 0
                         self.cpu.number_of_cards = 0
-                        pygame.draw.rect(self.screen, '#00850b', ((0, 0), (900, 700)), 0)
-                        self.help_txt = self.altfont.render("Select the amount to bet, then press Space!", True,"darkblue")
+                        pygame.draw.rect(self.screen, '#1a6633', ((0, 0), (900, 700)), 0)
+                        self.help_txt = self.altfont.render("Select the amount to bet, then press Space!", True,"lightgray")
                         self.turn[:] = ['betting']
                         # Resets every attribute except the money the player has. Also clears the screen.
                 else:
-                    self.help_txt = self.altfont.render("Uh oh You've Ran out of Money!!!", True,"darkblue")
-
+                    self.help_txt = self.altfont.render("Uh oh You've Ran out of Money! Play Again?", True,"lightgray")
+                    keypress = pygame.key.get_pressed()
+                    if keypress[pygame.K_SPACE]:
+                        self.user.bet = 50
+                        self.user.money = 500
+                        self.user.card_values = 0
+                        self.user.number_of_aces = 0
+                        self.user.number_of_cards = 0
+                        self.cpu.card_values = 0
+                        self.cpu.number_of_aces = 0
+                        self.cpu.number_of_cards = 0
+                        pygame.draw.rect(self.screen, '#1a6633', ((0, 0), (900, 700)), 0)
+                        self.help_txt = self.altfont.render("Select the amount to bet, then press Space!", True,"lightgray")
+                        self.turn[:] = ['betting']
             elif self.turn == ['betting']:
                 keypress = pygame.key.get_pressed()
                 if keypress[pygame.K_SPACE]:
@@ -113,7 +124,7 @@ class  Game:
                     # Changes the turn-off of the betting turn once the space bar is pressed
 
             # The functions below add the objects to the screen
-            pygame.draw.rect(self.screen, '#00850b', ((0, 50), (280, 450)), 0)
+            pygame.draw.rect(self.screen, '#1a6633', ((0, 50), (280, 450)), 0)
             self.stand_button.draw(self.turn)
 
             # Hit button , The .draw() method now returns True if clicked
@@ -130,7 +141,7 @@ class  Game:
             self.bet_txt = self.font.render("Current Bet:" + str(self.user.bet), True, "black")
 
 
-            pygame.draw.rect(self.screen, '#00850b', ((300, 500), (500, 80)), 0)
+            pygame.draw.rect(self.screen, '#1a6633', ((300, 500), (500, 80)), 0)
 
             # 2. Only show the count if we are NOT in the betting phase
             if self.turn != ['betting']:
@@ -138,12 +149,12 @@ class  Game:
                 self.screen.blit(self.hand_txt, (300, 500))
 
             # Below clears the screen of the text variables, then readds the text onto the screen.
-            pygame.draw.rect(self.screen, '#00850b',((500,600),(600,100)),0)
-            pygame.draw.rect(self.screen, '#00850b', ((0, 0), (500, 50)), 0)
-            pygame.draw.rect(self.screen, '#00850b', ((0, 625), (500, 625)), 0)
+            pygame.draw.rect(self.screen, '#1a6633',((500,600),(600,100)),0)
+            pygame.draw.rect(self.screen, '#1a6633', ((0, 0), (500, 50)), 0)
+            pygame.draw.rect(self.screen, '#1a6633', ((0, 625), (500, 625)), 0)
             self.screen.blit(self.money_txt, (600, 625))
             self.screen.blit(self.bet_txt, (0, 0))
-            self.screen.blit(self.help_txt, (0, 625))
+            self.screen.blit(self.help_txt, (25, 625))
 
             #This updates the screen with all the new information
             pygame.display.update()
@@ -153,37 +164,29 @@ class  Game:
         if card == 1:
             self.ss = Spritesheet('Game_Images/Club Cards.png',self.screen,self.user.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
-            self.list_of_cards.append(ss)
         elif card == 2:
             self.ss = Spritesheet('Game_Images/Diamond Cards.png', self.screen,self.user.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
-            self.list_of_cards.append(ss)
         elif card == 3:
             self.ss = Spritesheet('Game_Images/Heart Cards.png', self.screen,self.user.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
-            self.list_of_cards.append(ss)
         else:
             self.ss = Spritesheet('Game_Images/Spade Cards.png', self.screen,self.user.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
-            self.list_of_cards.append(ss)
         # Sets the image using a spritesheet before creating a pygame rectange with the dimensions of a card.
     def card_display_dealer(self, suit, card, num_of_cards):
         if card == 1:
             self.ss = Spritesheet_Dealer('Game_Images/Club Cards.png',self.screen,self.cpu.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
-            self.list_of_cards.append(ss)
         elif card == 2:
             self.ss = Spritesheet_Dealer('Game_Images/Diamond Cards.png', self.screen,self.cpu.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
-            self.list_of_cards.append(ss)
         elif card == 3:
             self.ss = Spritesheet_Dealer('Game_Images/Heart Cards.png', self.screen,self.cpu.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
-            self.list_of_cards.append(ss)
         else:
             self.ss = Spritesheet_Dealer('Game_Images/Spade Cards.png', self.screen,self.cpu.number_of_cards)
             ss = self.ss.image_at((0 + (90 * (card - 1)), 0,90, 130), num_of_cards)
-            self.list_of_cards.append(ss)
         # The dealer uses a different function because it needs to position the cards differently.
 
     def showdown(self):
