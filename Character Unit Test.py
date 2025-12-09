@@ -1,13 +1,19 @@
+######################################################################
+# Authors: Lindsay M and Julius F
+# Username: manabatl3, fritzj2
+#
+# Assignment: Final Project
+# Purpose: Create a unit test to test things such as aces
+######################################################################
+# licensed under a Creative Commons
+# Attribution-Noncommercial-Share Alike 3.0 United States License.
+####################################################################################
 import unittest , Character , Player
-
 
 class MyTestCase(unittest.TestCase):
     def setUp(self):
         self.player = Character.Character()
 
-
-    # def test_something(self):
-    #     self.assertEqual(True, False)  # add assertion here
 
     def test_ace_logic_directly(self):
         self.player.number_of_aces = 1
