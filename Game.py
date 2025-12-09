@@ -97,6 +97,13 @@ class  Game:
                 if keypress[pygame.K_SPACE]:
                     self.cpu.card_picker()
                     self.card_display_dealer(self.cpu.suit, self.cpu.card, self.cpu.number_of_cards)
+
+                    # for i in range(2):
+                    #     self.user.card_picker()
+                    #     self.card_display_dealer(self.user.suit, self.user.card, self.user.number_of_cards)
+                    #     pygame.display.update()
+                    #     time.sleep(0.2)
+
                     self.turn[:] = ['player']
                     # Changes the turn-off of the betting turn once the space bar is pressed
 
@@ -191,9 +198,10 @@ class Button:
         self.player = player
 
     def draw(self):
-
+        # If this is the 'Stand' button, ONLY draw it if it's the player's turn
+        if self.name == 'Stand' and self.turn != ['player']:
+            return  # Skip the rest of the function (don't draw, don't check clicks)
         pos = pygame.mouse.get_pos()
-        # print(pos)
 
         if self.rect.collidepoint(pos):   # this is the click function
             if pygame.mouse.get_pressed()[0] == 1:
