@@ -17,12 +17,12 @@
 **Source Assignment(s)**: ` Homework on "The Game of Nim. Teamwork on 'Intro to Classes, The Legend of Tuna"`
 
 ️**CRC Card(s)**:
-![Don't leave me in your README!](image/crc.png "Image of CRC card as an example. Upload your CRC card(s) in place of this one. ")
 ![Player CRC card!](image/Player%20CRC.png "Player CRC Card")
 ![Dealer CRC card!](image/Dealer%20CRC.png "Dealer CRC Card")
 ![Screen CRC card!](image/Screen.png "Screen CRC Card")
 ![Character CRC card!](image/Character%20CRC.png "Character CRC Card")
 ![Button CRC Card!](image/Button%20CRC%20Card.png "Button CRC Card")
+![SpriteSheet CRC Card!](image/SpriteSheet%20CRC.png "Spritesheet CRC Card")
 
 **Branches**: This project will **require** effective use of git.
 ```
