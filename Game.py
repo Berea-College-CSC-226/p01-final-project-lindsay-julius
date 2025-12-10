@@ -216,7 +216,7 @@ class Button:
         self.screen = screen
         width = image.get_width()
         height = image.get_height()
-        self.image = image # or pygame.transform.scale(image,(int(width * 2), int(height * 2))) for scale
+        self.image = image
         self.rect = self.image.get_rect()
         self.rect.topleft = (x, y)
         self.turn = turn

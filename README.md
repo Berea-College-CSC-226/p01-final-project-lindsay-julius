@@ -82,9 +82,8 @@
     
 ```
 
-### ❗Reflection
+### Reflection
 
-❗Each partner should write three to four well-written paragraphs address the following (at a minimum):
 - Why did you select the project that you did?
 - How closely did your final project reflect your initial design?
 - What did you learn from this process?
@@ -93,7 +92,22 @@
 - How well did you work with your partner? What made it go well? What made it challenging?
 
 ```
-    ...
+    We both orginially had two different ideas on what we wanted to do. Mine had something to do with creating a maze,
+    while his was to make a duplicate of Blackjack but adding different features. We both thought out the pros and cons for the games 
+    and chose BlackJack as it was the easiest one to plan off with. I'd say our final project reflected towards our initial design because 
+    we were able to implement the special cards we wanted and at the same time have a regular blackjack card game. 
+    
+    This project has taught me more on how to use different functions, methods, and even learning how to use Spritesheets. The hardest was to fully understand how we wanted the code to plan out exactly what 
+    we wanted. The spritesheets specifically was the hardest to understand because we had to pharse the code specifcially not really writing the code and it's function. 
+    You had to choose it's specific suit and read the image then also display the image. We also had a hard time making sure the game turns were being changed so we used a alising method which
+    I'm not too sure was the best idea at the moment but it helped us create the game eventually. 
+    
+    I guess planning everything out specifically to know which direction we should immieditatly go to. Because we knew what we wanted to do, it was just making sure which of which need to be done first. I believe my partner and I worked really well 
+    with everything. We were able to communicate and function well together. I liked the idea of us physically working together to really help debug and work on certain 
+    features together and also change things within how we felt about it. We were able to really give each of our own opinions on certain decisions together which made 
+    the game design better. This also then made it so neither of us was lost or confused about how we're designing the game. Though, this did set us back a bit because we 
+    weren't really working on it on our own other than that one time when we couldn't meet due to one of us being busy. But overall I didn't think we had much of a struggle 
+    working together. 
 ```
 
 ```
