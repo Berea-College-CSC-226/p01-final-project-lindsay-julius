@@ -92,7 +92,7 @@
 - How well did you work with your partner? What made it go well? What made it challenging?
 
 ```
-    We both orginially had two different ideas on what we wanted to do. Mine had something to do with creating a maze,
+    Lindsay Manabat: We both orginially had two different ideas on what we wanted to do. Mine had something to do with creating a maze,
     while his was to make a duplicate of Blackjack but adding different features. We both thought out the pros and cons for the games 
     and chose BlackJack as it was the easiest one to plan off with. I'd say our final project reflected towards our initial design because 
     we were able to implement the special cards we wanted and at the same time have a regular blackjack card game. 
@@ -111,7 +111,25 @@
 ```
 
 ```
-    Partner 2: **Replace this with your reflection
+    Julius Fritz: We selcted the project that we did because it was a game that I knew and it is something I thought would be simple and fun to play
+        It turned out similar to the inital design but the screen layout was WAY off from what I was intially expecting. It still plays in a similar manner but the special cards-
+        changed pretty drastically along the way I learned a lot about how to use spritesheets and working with images, they are tedious and hard to use when just given numbers
+        so make them as simple as possible. I learned how to use objects in a very interesting way to somewhat run a bunch of objects inside of another, kind of like an aquiarium-
+        full of fish. The spritesheet was by far the most difficult thing here, it reads in a very far removed way from traditional english.
+        This in turn mkaes it very hard to read and write since it wasn't something I could just say outloud to make it functional. It is such-
+        a complex system (in my opinion) and made it very hard to get correct. 
+        
+        The turn alias was a solution that I made originally that could realistically be solved by just tossing the-
+        object into another object. The example of this is with the Button class and the Turn_of_Play method from the game class. They both pass around the turn variable, which could have just-
+        been changed by passing the game()'s attribute turn into the Button. 
+       
+        I believe that we worked together pretty well and quite extensivley. We chose to work next to each other-
+        similar to partner programming for a lot of the work, this allowed us to almost always be on the same page as one another. This especically helped during the rougher starting stages-
+        of the project where there were still fuzzy parts to work out through the code. Some of the hard parts that we had would have to include the time where I missed class during the introduction-
+        of the assignment, causing us to start like a week later than we needed too. Physically working together really was the only drawback we had. Although it always kept us on the same page,-
+        we really didn't accomplish much outside of those meetings meaning we had gaps where we weren't working on it. The only time that we really worked separatley was the week before it was due,-
+        where we made significant progress without the other person. However, this did mean we were always on the same page, and none of us ever got left behind.
+        One more issue working togther was Thanksgiving break, where neither one of us really worked on it. It's a small issue and we were both on break, but it is still a chunk of time where nothing really got done.
 ```
 
 ---
